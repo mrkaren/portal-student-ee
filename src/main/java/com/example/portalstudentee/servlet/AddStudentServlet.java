@@ -21,7 +21,7 @@ public class AddStudentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("courses", courseService.getAllCourses());
-        req.getRequestDispatcher("/addStudent.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/addStudent.jsp").forward(req, resp);
     }
 
     @Override

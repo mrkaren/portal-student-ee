@@ -1,6 +1,7 @@
 package com.example.portalstudentee.servlet;
 
 import com.example.portalstudentee.model.Course;
+import com.example.portalstudentee.model.User;
 import com.example.portalstudentee.service.CourseService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,6 @@ public class CoursesServlet extends HttpServlet {
         List<Course> allCourses = courseService.getAllCourses();
 
         req.setAttribute("courses", allCourses);
-        req.getRequestDispatcher("courses.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/courses.jsp").forward(req, resp);
     }
 }

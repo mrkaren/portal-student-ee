@@ -20,7 +20,7 @@ public class ChangeCourseServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
 
         req.setAttribute("course", courseService.getCourseById(id));
-        req.getRequestDispatcher("/changeCourse.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/changeCourse.jsp").forward(req, resp);
     }
 
     @Override

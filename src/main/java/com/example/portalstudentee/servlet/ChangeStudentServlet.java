@@ -23,7 +23,7 @@ public class ChangeStudentServlet extends HttpServlet {
         req.setAttribute("student", studentService.getStudentById(id));
 
         req.setAttribute("courses", courseService.getAllCourses());
-        req.getRequestDispatcher("/changeStudent.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/changeStudent.jsp").forward(req, resp);
     }
 
     @Override
