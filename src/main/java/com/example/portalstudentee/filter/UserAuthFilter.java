@@ -4,7 +4,6 @@ package com.example.portalstudentee.filter;
 import com.example.portalstudentee.model.User;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
@@ -21,7 +20,6 @@ import java.io.IOException;
         "/addStudent"
 })
 public class UserAuthFilter implements Filter {
-
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

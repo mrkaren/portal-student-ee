@@ -13,6 +13,16 @@
 <% List<Course> courses = (List<Course>) request.getAttribute("courses"); %>
 <% User user = (User) session.getAttribute("user"); %>
 
+<%
+    String message = (String) session.getAttribute("message");
+    if (message != null && !message.isEmpty()) { %>
+<%=message%>
+
+<%
+        session.removeAttribute("message");
+    }
+%>
+
 <div class="container">
     <header class="page-header">
         <a href="${pageContext.request.contextPath}/" class="back-link">

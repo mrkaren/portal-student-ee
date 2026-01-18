@@ -19,8 +19,15 @@ public class ChangeCourseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
 
-        req.setAttribute("course", courseService.getCourseById(id));
-        req.getRequestDispatcher("/WEB-INF/changeCourse.jsp").forward(req, resp);
+        Course courseById = courseService.getCourseById(id);
+        if (courseById == null) {
+            req.getSession().setAttribute("message", "Course not found with id " + id);
+            resp.sendRedirect("/courses");
+        } else {
+            req.setAttribute("course", courseById);
+            req.getRequestDispatcher("/WEB-INF/changeCourse.jsp").forward(req, resp);
+        }
+
     }
 
     @Override
@@ -28,15 +35,17 @@ public class ChangeCourseServlet extends HttpServlet {
         int id = Integer.parseInt(req.getParameter("id"));
         Course course = courseService.getCourseById(id);
 
-        String name = req.getParameter("name");
-        double price = Double.parseDouble(req.getParameter("price"));
-
-        course.setName(name);
-        course.setPrice(price);
-
-        courseService.changeCourse(course);
-
+        if (course == null) {
+            req.getSession().setAttribute("message", "Course not found with id " + id);
+        } else {
+            String name = req.getParameter("name");
+            double price = Double.parseDouble(req.getParameter("price"));
+            course.setName(name);
+            course.setPrice(price);
+            courseService.changeCourse(course);
+        }
         resp.sendRedirect("/courses");
+
 
     }
 }

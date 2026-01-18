@@ -42,6 +42,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Picture</th>
                 <th>Name</th>
                 <th>Surname</th>
                 <th>Email</th>
@@ -56,6 +57,12 @@
             <% for (Student student : students) { %>
             <tr>
                 <td><%= student.getId() %>
+                <td>
+                    <%if (student.getPictureName() == null || student.getPictureName().isEmpty()) { %>
+                    <img width="50" src="/img/img.png">
+                    <% } else { %>
+                    <img width="50" src="/getImage?picture_name=<%=student.getPictureName()%>">
+                    <%}%>
                 </td>
                 <td><%= student.getName() %>
                 </td>
