@@ -4,19 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Student {
+public class Skill {
 
     private int id;
     private String name;
-    private String surname;
-    private String email;
-    private Course course;
-    private String pictureName;
-    private List<Skill> skills;
-
 }

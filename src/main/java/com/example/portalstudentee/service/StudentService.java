@@ -2,6 +2,7 @@ package com.example.portalstudentee.service;
 
 
 import com.example.portalstudentee.db.DBConnectionProvider;
+import com.example.portalstudentee.model.Skill;
 import com.example.portalstudentee.model.Student;
 
 import java.sql.Connection;
@@ -16,6 +17,7 @@ public class StudentService {
 
     private Connection connection = DBConnectionProvider.getInstance().getConnection();
     private CourseService courseService = new CourseService();
+    private SkillService skillService = new SkillService();
 
     public void addStudent(Student student) {
         String sql = "INSERT INTO student(name, surname, email, course_id, picture_name) VALUES (?, ?, ?, ?,?)";
@@ -30,9 +32,21 @@ public class StudentService {
             if (generatedKeys.next()) {
                 student.setId(generatedKeys.getInt(1));
             }
+            String sqlForSkill = "Insert into student_skill (student_id, skill_id) VALUES (?, ?)";
+            if (student.getSkills() != null && !student.getSkills().isEmpty()) {
+                for (Skill skill : student.getSkills()) {
+                    try(PreparedStatement preparedStatementSkill = connection.prepareStatement(sqlForSkill)) {
+                        preparedStatementSkill.setInt(1, student.getId());
+                        preparedStatementSkill.setInt(2, skill.getId());
+                        preparedStatementSkill.executeUpdate();
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 
     public List<Student> getAllStudents() {
@@ -99,6 +113,10 @@ public class StudentService {
         student.setEmail(resultSet.getString("email"));
         student.setCourse(courseService.getCourseById(resultSet.getInt("course_id")));
         student.setPictureName(resultSet.getString("picture_name"));
+
+        List<Skill> studentSkillsByStudentId = skillService.getStudentSkillsByStudentId(student.getId());
+        student.setSkills(studentSkillsByStudentId);
+
         return student;
     }
 

@@ -18,7 +18,6 @@ public class GetImageServlet extends HttpServlet {
 
     private static final String IMAGE_UPLOAD_PATH = "/Users/karen/Data/lessons/Java-2025/portal-student-ee/upload-images/";
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String pictureName = req.getParameter("picture_name");

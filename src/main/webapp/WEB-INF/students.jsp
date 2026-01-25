@@ -2,6 +2,7 @@
 <%@ page import="com.example.portalstudentee.model.Student" %>
 <%@ page import="com.example.portalstudentee.model.User" %>
 <%@ page import="com.example.portalstudentee.model.UserRole" %>
+<%@ page import="com.example.portalstudentee.model.Skill" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -47,6 +48,7 @@
                 <th>Surname</th>
                 <th>Email</th>
                 <th>Course</th>
+                <th>Skills</th>
                 <%if (user.getRole() == UserRole.ADMIN) {%>
                 <th>Actions</th>
                 <%}%>
@@ -71,6 +73,11 @@
                 <td><%= student.getEmail() %>
                 </td>
                 <td><%= student.getCourse().getName() %>
+                </td>
+                <td>
+                    <% for (Skill skill : student.getSkills()) { %>
+                    <span><%=skill.getName()%> </span>
+                    <% } %>
                 </td>
                 <%if (user.getRole() == UserRole.ADMIN) {%>
 

@@ -1,5 +1,6 @@
 <%@ page import="com.example.portalstudentee.model.Course" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.example.portalstudentee.model.Skill" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,6 +8,7 @@
 </head>
 <body>
 <% List<Course> courses = (List<Course>) request.getAttribute("courses"); %>
+<% List<Skill> skills = (List<Skill>) request.getAttribute("skills"); %>
 Add Student
 
 <form action="/addStudent" method="post" enctype="multipart/form-data">
@@ -18,7 +20,12 @@ Add Student
     <option value="<%=course.getId()%>"><%=course.getName()%>
     </option>
     <% }%>
-</select>
+</select><br>
+    Skills:
+    <% for (Skill skill : skills) { %>
+    <input type="checkbox" name="skills" value="<%=skill.getId()%>"> <%=skill.getName()%>
+    <% } %>
+    <br>
     <input type="file" name="pic"><br>
     <input type="submit" value="Submit">
 </form>
